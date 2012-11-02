@@ -1,4 +1,4 @@
-# Rubyfox::SFSObject
+# Rubyfox::SFSObject [![Build Status](https://secure.travis-ci.org/neopoly/rubyfox-sfsobject.png)](http://travis-ci.org/neopoly/rubyfox-sfsobject)
 
 Converts between SmartFox's SFSObjects and Ruby Hashes.
 
