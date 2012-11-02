@@ -3,12 +3,8 @@ require 'simple_assertions'
 
 require 'rubyfox/sfsobject'
 
-if sf_dir = ENV['SF_DIR']
-  Rubyfox::SFSObject.boot!(sf_dir + "/lib")
-else
-  raise LoadError, "Please points SF_DIR to your SmartFox installation."
-end
-
+ENV['SF_DIR'] ||= File.join(File.dirname(__FILE__), 'vendor', 'smartfox')
+Rubyfox::SFSObject.boot!(ENV['SF_DIR'] + "/lib")
 
 class RubyfoxCase < MiniTest::Spec
   include SimpleAssertions::AssertRaises
