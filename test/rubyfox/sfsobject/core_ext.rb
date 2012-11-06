@@ -1,7 +1,7 @@
 require 'helper'
-require 'rubyfox/sfsobject/extend'
+require 'rubyfox/sfsobject/core_xt'
 
-class RubyfoxSFSObjectExtendTest < RubyfoxCase
+class RubyfoxSFSObjectCoreExtTest < RubyfoxCase
   context "bulk" do
     test "methods" do
       hash = { :key => "value"}
