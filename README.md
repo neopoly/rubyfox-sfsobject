@@ -18,16 +18,30 @@ Or install it yourself as:
 
 ## Usage
 
+### Bulk mode
+
     require 'rubyfox/sfsobject/bulk'
     sfs_object = Rubyfox::SFSObject::Bulk.to_sfs({ :hello => "world" })
     # => SFSObject ready to use in SmartFox
-    hash = Rubyfox::SFSObject::Bulk.to.hash(sfs_object)
+    hash = Rubyfox::SFSObject::Bulk.to_hash(sfs_object)
     # => { :hello => "world" }
 
 
+### Schema mode
+
+    require 'rubyfox/sfsobject/schema'
+    schema = { :hello => String }
+    sfs_object = Rubyfox::SFSObject::Schema.to_sfs(schema, { :hello => "world" })
+    # => SFSObject ready to use in SmartFox
+    hash = Rubyfox::SFSObject::Schema.to_hash(schema, sfs_object)
+    # => { :hello => "world" }
+
+
+### Core extension
+
 You can extend Hash and SFSObject with method shortcuts:
 
-    require 'rubyfox/sfsobject/extend'
+    require 'rubyfox/sfsobject/core_ext'
     sfs_object = { :hello => "world" }.to_sfs
     # => SFSObject
     sfs_object.to_hash
