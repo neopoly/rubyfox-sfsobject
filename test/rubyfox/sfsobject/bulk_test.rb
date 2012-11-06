@@ -18,8 +18,8 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     end
 
     test "string" do
-      assert_conversion :key => "value"
-      assert_conversion :key => "üöäÜÖÄß"
+      assert_conversion :string => "value"
+      assert_conversion :string => "üöäÜÖÄß"
     end
 
     test "boolean" do
@@ -64,7 +64,7 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     end
 
     test "boolean" do
-      assert_conversion :bool => [ true, true, false ]
+      assert_conversion :bool => [ true, false ]
     end
 
     test "fixnum" do
