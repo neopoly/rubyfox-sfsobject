@@ -4,8 +4,6 @@ require 'helper'
 require 'rubyfox/sfsobject/bulk'
 
 class RubyfoxSFSObjectBulkTest < RubyfoxCase
-  let(:bulk) { Rubyfox::SFSObject::Bulk }
-
   test "empty" do
     assert_conversion Hash.new
   end
@@ -86,7 +84,7 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
   private
 
   def assert_conversion(input, output=input)
-    object = bulk.to_sfs(input)
-    assert_equal output, bulk.to_hash(object)
+    object = Rubyfox::SFSObject::Bulk.to_sfs(input)
+    assert_equal output, Rubyfox::SFSObject::Bulk.to_hash(object)
   end
 end
