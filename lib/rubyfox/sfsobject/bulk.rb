@@ -12,7 +12,7 @@ module Rubyfox
         FalseClass    =>  :putBool,
         Fixnum        =>  :putInt,
         Float         =>  :putDouble,
-        Hash          =>  proc { |o, k, v| o.putSFSObject(k, Rubyfox::SFSObject::Bulk.to_sfs(v)) },
+        Hash          =>  proc { |o, k, v| o.putSFSObject(k, to_sfs(v)) },
         [String]      =>  :putUtfStringArray,
         [TrueClass]   =>  :putBoolArray,
         [FalseClass]  =>  :putBoolArray,
@@ -24,7 +24,7 @@ module Rubyfox
         [Float]       =>  :putDoubleArray,
         [Hash]        =>  proc do |o, k, v|
           ary = Java::SFSArray.new
-          v.each { |e| ary.addSFSObject(Rubyfox::SFSObject::Bulk.to_sfs(e)) }
+          v.each { |e| ary.addSFSObject(to_sfs(e)) }
           o.putSFSArray(k, ary)
         end
       }
@@ -41,9 +41,9 @@ module Rubyfox
         "INT_ARRAY"         =>  proc { |h, k, v| h[k.to_sym] = v.object.to_a },
         "LONG_ARRAY"        =>  :getLongArray,
         "DOUBLE_ARRAY"      =>  :getDoubleArray,
-        "SFS_OBJECT"        =>  proc { |h, k, v| h[k.to_sym] = Rubyfox::SFSObject::Bulk.to_hash(v.object) },
+        "SFS_OBJECT"        =>  proc { |h, k, v| h[k.to_sym] = to_hash(v.object) },
         "SFS_ARRAY"         =>  proc do |h, k, v|
-          h[k.to_sym] = v.object.iterator.map { |e| Rubyfox::SFSObject::Bulk.to_hash(e.object) }
+          h[k.to_sym] = v.object.iterator.map { |e| to_hash(e.object) }
         end
       }
 
