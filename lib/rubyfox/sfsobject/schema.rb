@@ -23,7 +23,7 @@ module Rubyfox
         [String]  => proc { |o, s, k, v| o.put_utf_string_array(k, v) },
         [Boolean] => proc { |o, s, k, v| o.put_bool_array(k, v) },
         [Fixnum]  =>  proc do |o, s, k, v|
-          collection = java.util.ArrayList.new(v.size)
+          collection = Java::ArrayList.new(v.size)
           v.each { |e| collection.add(e.to_java(:int)) }
           o.put_int_array(k, collection)
         end,
