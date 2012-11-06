@@ -51,6 +51,10 @@ You can extend Hash and SFSObject with method shortcuts:
 
 *Note* that all hash keys will be converted to symbols.
 
+## TODO
+
+* More docs, please!
+
 ## Contributing
 
 1. Fork it
