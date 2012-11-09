@@ -59,6 +59,8 @@ You can extend Hash and SFSObject with method shortcuts:
 ==== Hash-like access
 
   require 'rubyfox/sfsobject/core_ext'
+  sfs_object = Rubyfox::SFSObject[:meaning_of_life => 42]
+  sfs_object[:meaning_of_life] # => 42
   sfs_object[:string] = "value"
   sfs_object[:string] # => "value"
 

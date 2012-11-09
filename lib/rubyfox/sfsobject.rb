@@ -19,7 +19,11 @@ module Rubyfox
     end
 
     def self.from_json(data)
-      Java::SFSObject.new_from_json_data(data)
+      Java::SFSObject.from_json(data)
+    end
+
+    def self.[](*args)
+      Java::SFSObject[*args]
     end
   end
 end

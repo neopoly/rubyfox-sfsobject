@@ -16,6 +16,14 @@ class RubyfoxSFSObjectAccessorTest < RubyfoxCase
     assert_equal 2, sfs_object["symbol"]
   end
 
+  context "SFSObject[]" do
+    test "sets hash" do
+      object = Rubyfox::SFSObject[:string => "value", :sub => { :fixnum => 23 }]
+      assert_equal "value", object[:string]
+      assert_equal 23, object[:sub][:fixnum]
+    end
+  end
+
   context "plain" do
     test "nil" do
       assert_accessor :null => nil

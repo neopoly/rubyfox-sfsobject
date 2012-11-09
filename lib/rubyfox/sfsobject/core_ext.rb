@@ -25,4 +25,8 @@ class Rubyfox::SFSObject::Java::SFSObject
       Rubyfox::SFSObject::Schema.to_hash(schema, self)
     end
   end
+
+  class << self
+    alias :from_json :new_from_json_data
+  end
 end
