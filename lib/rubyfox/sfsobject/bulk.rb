@@ -48,7 +48,7 @@ module Rubyfox
       }
 
       # hash -> object
-      def to_sfs(hash={}, schema=nil)
+      def to_sfs(hash={})
         object = Java::SFSObject.new
         hash.each do |key, value|
           wrap_value!(object, key, value)
