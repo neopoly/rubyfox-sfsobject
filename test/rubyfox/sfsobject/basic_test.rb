@@ -1,6 +1,6 @@
 require 'helper'
 
-require 'rubyfox/sfsobject/java'
+require 'rubyfox/sfsobject/core_ext'
 
 class RubyfoxSFSObjectBasicTest < RubyfoxCase
   let(:sfs_object) { Rubyfox::SFSObject.new }
