@@ -40,7 +40,6 @@ Or install it yourself as:
   hash = Rubyfox::SFSObject::Schema.to_hash(schema, sfs_object)
   # => { :hello => "world" }
 
-
 === Core extension
 
 You can extend Hash and SFSObject with method shortcuts:
@@ -50,6 +49,10 @@ You can extend Hash and SFSObject with method shortcuts:
   # => SFSObject
   sfs_object.to_hash
   # { :hello => "world" }
+
+  json = sfs_object.to_json
+  Rubyfox::SFSObject.from_json(json)
+
 
 == Caveats
 

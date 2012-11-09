@@ -21,4 +21,12 @@ class Rubyfox::SFSObject::Java::SFSObject
       Rubyfox::SFSObject::Schema.to_hash(schema, self)
     end
   end
+
+  def self.from_json(data)
+    if data == "{}"
+      new
+    else
+      new_from_json_data(data)
+    end
+  end
 end

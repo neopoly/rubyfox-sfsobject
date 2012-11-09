@@ -13,5 +13,13 @@ module Rubyfox
         end
       end
     end
+
+    def self.new(*args)
+      Java::SFSObject.new(*args)
+    end
+
+    def self.from_json(data)
+      Java::SFSObject.new_from_json_data(data)
+    end
   end
 end
