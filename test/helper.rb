@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'testem'
 require 'simple_assertions'
 
 require 'rubyfox/sfsobject'
@@ -6,13 +7,6 @@ require 'rubyfox/sfsobject'
 ENV['SF_DIR'] ||= File.join(File.dirname(__FILE__), 'vendor', 'smartfox')
 Rubyfox::SFSObject.boot!(ENV['SF_DIR'] + "/lib")
 
-class RubyfoxCase < MiniTest::Spec
+class RubyfoxCase < Testem
   include SimpleAssertions::AssertRaises
-
-  class << self
-    alias :setup :before
-    alias :teardown :after
-    alias :context :describe
-    alias :test :it
-  end
 end
