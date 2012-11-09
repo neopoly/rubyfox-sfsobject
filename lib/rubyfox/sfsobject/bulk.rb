@@ -30,7 +30,7 @@ module Rubyfox
       }
 
       TO_HASH = {
-        "NULL"              =>  proc { |h, k, v| h[k.to_sym] = nil },
+        "NULL"              =>  proc { |k, v| nil },
         "UTF_STRING"        =>  :getUtfString,
         "BOOL"              =>  :getBool,
         "INT"               =>  :getInt,
@@ -38,12 +38,12 @@ module Rubyfox
         "UTF_STRING_ARRAY"  =>  :getUtfStringArray,
         "BOOL_ARRAY"        =>  :getBoolArray,
         #"INT_ARRAY"         =>  :getIntArray,
-        "INT_ARRAY"         =>  proc { |h, k, v| h[k.to_sym] = v.object.to_a },
+        "INT_ARRAY"         =>  proc { |k, v| v.object.to_a },
         "LONG_ARRAY"        =>  :getLongArray,
         "DOUBLE_ARRAY"      =>  :getDoubleArray,
-        "SFS_OBJECT"        =>  proc { |h, k, v| h[k.to_sym] = to_hash(v.object) },
-        "SFS_ARRAY"         =>  proc do |h, k, v|
-          h[k.to_sym] = v.object.iterator.map { |e| to_hash(e.object) }
+        "SFS_OBJECT"        =>  proc { |k, v| to_hash(v.object) },
+        "SFS_ARRAY"         =>  proc do |k, v|
+          v.object.iterator.map { |e| to_hash(e.object) }
         end
       }
 
@@ -51,18 +51,22 @@ module Rubyfox
       def to_sfs(hash={}, schema=nil)
         object = Java::SFSObject.new_instance
         hash.each do |key, value|
-          if wrapper_method = _wrapper(value)
-            case wrapper_method
-            when Symbol
-              object.send(wrapper_method, key, value)
-            else
-              wrapper_method.call(object, key, value)
-            end
-          else
-            raise ArgumentError, "wrapper for #{key}=#{value} (#{value.class}) not found"
-          end
+          wrap_value!(object, key, value)
         end
         object
+      end
+
+      def wrap_value!(object, key, value)
+        if wrapper_method = _wrapper(value)
+          case wrapper_method
+          when Symbol
+            object.send(wrapper_method, key, value)
+          else
+            wrapper_method.call(object, key, value)
+          end
+        else
+          raise ArgumentError, "wrapper for #{key}=#{value} (#{value.class}) not found"
+        end
       end
 
       def _wrapper(value)
@@ -78,19 +82,23 @@ module Rubyfox
       def to_hash(object)
         hash = {}
         object.keys.each do |key|
-          value = object.get(key)
-          if wrapper_method = _unwrapper(value)
-            case wrapper_method
-            when Symbol
-              hash[key.to_sym] = object.send(wrapper_method, key)
-            else
-              wrapper_method.call(hash, key, value)
-            end
-          else
-            raise ArgumentError, "unwrapper for #{key}=#{value.object.inspect} (#{value.type_id}) not found"
-          end
+          hash[key.to_sym] = unwrap_value!(object, key)
         end
         hash
+      end
+
+      def unwrap_value!(object, key)
+        value = object.get(key)
+        if wrapper_method = _unwrapper(value)
+          case wrapper_method
+          when Symbol
+            object.send(wrapper_method, key)
+          else
+            wrapper_method.call(key, value)
+          end
+        else
+          raise ArgumentError, "unwrapper for #{key}=#{value.object.inspect} (#{value.type_id}) not found"
+        end
       end
 
       def _unwrapper(value)

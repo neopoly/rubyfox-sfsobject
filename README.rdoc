@@ -50,8 +50,17 @@ You can extend Hash and SFSObject with method shortcuts:
   sfs_object.to_hash
   # { :hello => "world" }
 
+==== JSON
+
+  require 'rubyfox/sfsobject/core_ext'
   json = sfs_object.to_json
   Rubyfox::SFSObject.from_json(json)
+
+==== Hash-like access
+
+  require 'rubyfox/sfsobject/core_ext'
+  sfs_object[:string] = "value"
+  sfs_object[:string] # => "value"
 
 
 == Caveats

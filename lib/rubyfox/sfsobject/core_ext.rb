@@ -2,6 +2,7 @@
 
 require 'rubyfox/sfsobject/bulk'
 require 'rubyfox/sfsobject/schema'
+require 'rubyfox/sfsobject/accessor'
 
 class Hash
   def to_sfs(schema=:none)
@@ -14,6 +15,8 @@ class Hash
 end
 
 class Rubyfox::SFSObject::Java::SFSObject
+  include Rubyfox::SFSObject::Accessor
+
   def to_hash(schema=:none)
     if schema == :none
       Rubyfox::SFSObject::Bulk.to_hash(self)
