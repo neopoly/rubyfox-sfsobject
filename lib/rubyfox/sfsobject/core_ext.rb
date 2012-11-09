@@ -1,5 +1,6 @@
 # Extends core object with some conversion methods.
 
+require 'rubyfox/sfsobject'
 require 'rubyfox/sfsobject/bulk'
 require 'rubyfox/sfsobject/schema'
 require 'rubyfox/sfsobject/accessor'
