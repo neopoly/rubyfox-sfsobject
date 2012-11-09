@@ -49,7 +49,7 @@ module Rubyfox
 
       # hash -> object
       def to_sfs(hash={}, schema=nil)
-        object = Java::SFSObject.new_instance
+        object = Java::SFSObject.new
         hash.each do |key, value|
           wrap_value!(object, key, value)
         end

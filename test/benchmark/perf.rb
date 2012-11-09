@@ -67,6 +67,10 @@ Benchmark.ips do |x|
     empty.to_sfs
   end
 
+  x.report("empty: hash -[] sfs") do
+    Rubyfox::SFSObject[empty]
+  end
+
   x.report("empty: json -> sfs") do
     Rubyfox::SFSObject.from_json(emptyjson)
   end
@@ -83,6 +87,10 @@ Benchmark.ips do |x|
     short.to_sfs
   end
 
+  x.report("short: hash -[] sfs") do
+    Rubyfox::SFSObject[short]
+  end
+
   x.report("short: json -> sfs") do
     Rubyfox::SFSObject.from_json(shortjson)
   end
@@ -97,6 +105,10 @@ Benchmark.ips do |x|
 
   x.report("long: hash -> sfs") do
     long.to_sfs
+  end
+
+  x.report("long: hash -[] sfs") do
+    Rubyfox::SFSObject[long]
   end
 
   x.report("long: json -> sfs") do

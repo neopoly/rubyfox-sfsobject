@@ -66,7 +66,7 @@ module Rubyfox
       end
 
       def self.to_sfs(schemas, hash)
-        object = Java::SFSObject.new_instance
+        object = Java::SFSObject.new
         schemas.each do |key, schema|
           next unless hash && hash.key?(key)
           value = hash[key]
