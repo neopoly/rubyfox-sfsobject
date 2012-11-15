@@ -53,6 +53,10 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
       assert_conversion :sub => { :key => "value" }
       assert_conversion :sub => { :deep => { :key => "value" } }
     end
+
+    test "sfsobject" do
+      assert_conversion({ :sfsobject => Rubyfox::SFSObject.new }, { :sfsobject => {} })
+    end
   end
 
   context "array" do

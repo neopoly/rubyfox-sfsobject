@@ -13,6 +13,7 @@ module Rubyfox
         Fixnum        =>  :putInt,
         Float         =>  :putDouble,
         Hash          =>  proc { |o, k, v| o.putSFSObject(k, to_sfs(v)) },
+        Java::SFSObject => :putSFSObject,
         [String]      =>  :putUtfStringArray,
         [TrueClass]   =>  :putBoolArray,
         [FalseClass]  =>  :putBoolArray,
