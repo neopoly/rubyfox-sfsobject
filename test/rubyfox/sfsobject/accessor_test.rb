@@ -24,6 +24,19 @@ class RubyfoxSFSObjectAccessorTest < RubyfoxCase
     end
   end
 
+  test "key?" do
+    assert_equal false, sfs_object.key?(:foo)
+    sfs_object[:foo] = "bar"
+    assert_equal true, sfs_object.key?(:foo)
+  end
+
+  test "delete" do
+    sfs_object[:foo] = "bar"
+    assert sfs_object.key?(:foo)
+    sfs_object.delete(:foo)
+    refute sfs_object.key?(:foo)
+  end
+
   context "plain" do
     test "nil" do
       assert_accessor :null => nil

@@ -24,6 +24,14 @@ module Rubyfox
       def []=(key, value)
         Bulk.wrap_value!(self, key, value)
       end
+
+      def key?(key)
+        contains_key(key)
+      end
+
+      def delete(key)
+        remove_element(key)
+      end
     end
   end
 end
