@@ -27,6 +27,11 @@ module Rubyfox
           ary = Java::SFSArray.new
           v.each { |e| ary.addSFSObject(to_sfs(e)) }
           o.putSFSArray(k, ary)
+        end,
+        [Java::SFSObject] => proc do |o, k, v|
+          ary = Java::SFSArray.new
+          v.each { |e| ary.addSFSObject(e) }
+          o.putSFSArray(k, ary)
         end
       }
 
