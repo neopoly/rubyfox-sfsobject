@@ -95,6 +95,8 @@ module Rubyfox
 
       def unwrap_value!(object, key)
         value = object.get(key)
+        raise ArgumentError, "nil value for #{key.inspect}" unless value
+
         if wrapper_method = _unwrapper(value)
           case wrapper_method
           when Symbol
