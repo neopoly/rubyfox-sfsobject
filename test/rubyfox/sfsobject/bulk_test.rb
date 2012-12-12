@@ -12,6 +12,13 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     assert_conversion({ "key" => nil }, { :key => nil })
   end
 
+  test "raise ArgumentError for nil values" do
+    object = Rubyfox::SFSObject.new
+    assert_raises ArgumentError, :message => /nil value for :foo/ do
+      Rubyfox::SFSObject::Bulk.unwrap_value!(object, :foo)
+    end
+  end
+
   context "plain" do
     test "nil" do
       assert_conversion :null => nil
