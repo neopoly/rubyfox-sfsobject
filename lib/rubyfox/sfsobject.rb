@@ -6,10 +6,10 @@ module Rubyfox
       unless $LOAD_PATH.include?(sf_dir)
         path = Pathname.new(sf_dir).join("*.jar")
         jars = Dir[path].to_a
-        unless jars.empty?
+        if jars.any?
           jars.each { |jar| require jar }
         else
-          raise LoadError, "No jars found in #{path}"
+          raise LoadError, "No jars found in #{path.inspect}"
         end
       end
     end
