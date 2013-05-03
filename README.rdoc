@@ -1,4 +1,6 @@
-= Rubyfox::SFSObject {<img src="https://secure.travis-ci.org/neopoly/rubyfox-sfsobject.png?branch=master" alt="Build Status" />}[https://travis-ci.org/neopoly/rubyfox-sfsobject]
+= Rubyfox::SFSObject
+
+{<img src="https://secure.travis-ci.org/neopoly/rubyfox-sfsobject.png?branch=master" alt="Build Status" />}[https://travis-ci.org/neopoly/rubyfox-sfsobject] {<img src="https://badge.fury.io/rb/rubyfox-sfsobject.png" alt="Gem Version" />}[http://badge.fury.io/rb/rubyfox-sfsobject] {<img src="https://codeclimate.com/github/neopoly/rubyfox-sfsobject.png" />}[https://codeclimate.com/github/neopoly/rubyfox-sfsobject]
 
 Converts between SmartFox's SFSObjects and Ruby Hashes.
 
