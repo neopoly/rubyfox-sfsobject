@@ -1,3 +1,22 @@
 language: ruby
+sudo: false
+cache: bundler
 rvm:
   - jruby-19mode
+  - jruby
+  - jruby-head
+env:
+  global:
+    - CODECLIMATE_REPO_TOKEN=7800b9ed7143dedbdc5e3c62021efa6944bacce3ea9e001654d7481cdabb8c07
+    - JRUBY_OPTS='--dev -J-Xmx1024M'
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: jruby-head
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/bc3a12e425e557a6ca23
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: false     # default: false

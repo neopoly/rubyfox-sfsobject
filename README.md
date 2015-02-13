@@ -1,19 +1,23 @@
+[github]: https://github.com/neopoly/rubyfox-sfsobject
+[doc]: http://rubydoc.info/github/neopoly/rubyfox-sfsobject/master/file/README.md
+[gem]: https://rubygems.org/gems/rubyfox-sfsobject
+[travis]: https://travis-ci.org/neopoly/rubyfox-sfsobject
+[codeclimate]: https://codeclimate.com/github/neopoly/rubyfox-sfsobject
+[inchpages]: https://inch-ci.org/github/neopoly/rubyfox-sfsobject
+
 # Rubyfox::SFSObject
 
-[<img
-src="https://secure.travis-ci.org/neopoly/rubyfox-sfsobject.png?branch=master"
-alt="Build Status" />](https://travis-ci.org/neopoly/rubyfox-sfsobject) [<img
-src="https://badge.fury.io/rb/rubyfox-sfsobject.png" alt="Gem Version"
-/>](http://badge.fury.io/rb/rubyfox-sfsobject) [<img
-src="https://codeclimate.com/github/neopoly/rubyfox-sfsobject.png"
-/>](https://codeclimate.com/github/neopoly/rubyfox-sfsobject)
+[![Travis](https://img.shields.io/travis/neopoly/rubyfox-sfsobject.svg?branch=master)][travis]
+[![Gem Version](https://img.shields.io/gem/v/rubyfox-sfsobject.svg)][gem]
+[![Code Climate](https://img.shields.io/codeclimate/github/neopoly/rubyfox-sfsobject.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/neopoly/rubyfox-sfsobject/badges/coverage.svg)][codeclimate]
+[![Inline docs](https://inch-ci.org/github/neopoly/rubyfox-sfsobject.svg?branch=master&style=flat)][inchpages]
+
+[Gem][gem] |
+[Source][github] |
+[Documentation][doc]
 
 Converts between SmartFox's SFSObjects and Ruby Hashes.
-
-[Gem](https://rubygems.org/gems/rubyfox-sfsobject) |
-[Source](https://github.com/neopoly/rubyfox-sfsobject) |
-[Documentation](http://rubydoc.info/github/neopoly/rubyfox-sfsobject/master/fi
-le/README.rdoc)
 
 ## Installation
 
