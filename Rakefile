@@ -26,6 +26,8 @@ task :console do
   ENV['SF_DIR'] ||= File.join(File.dirname(__FILE__), 'test', 'vendor', 'smartfox')
   Rubyfox::SFSObject.boot!(ENV['SF_DIR'] + "/lib")
 
+  require 'rubyfox/sfsobject/core_ext'
+
   require 'irb'
   ARGV.clear
   IRB.start
