@@ -17,3 +17,16 @@ RDoc::Task.new do |rdoc|
   rdoc.main     = 'README.rdoc'
   rdoc.rdoc_files.include('README.rdoc', 'lib/**/*.rb')
 end
+
+desc "Run console"
+task :console do
+  $LOAD_PATH << "./lib"
+  require 'rubyfox/sfsobject'
+
+  ENV['SF_DIR'] ||= File.join(File.dirname(__FILE__), 'test', 'vendor', 'smartfox')
+  Rubyfox::SFSObject.boot!(ENV['SF_DIR'] + "/lib")
+
+  require 'irb'
+  ARGV.clear
+  IRB.start
+end
