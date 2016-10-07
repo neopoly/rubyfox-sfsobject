@@ -48,9 +48,7 @@ module Rubyfox
         "LONG_ARRAY"        =>  :getLongArray,
         "DOUBLE_ARRAY"      =>  :getDoubleArray,
         "SFS_OBJECT"        =>  proc { |k, v| to_hash(v.object) },
-        "SFS_ARRAY"         =>  proc do |k, v|
-          v.object.iterator.map { |e| to_hash(e.object) }
-        end
+        "SFS_ARRAY"         =>  proc { |k, v| to_array(v.object) }
       }
 
       # hash -> object
@@ -93,8 +91,18 @@ module Rubyfox
         hash
       end
 
+      def to_array(object)
+        object.iterator.each_with_index.map do |value, index|
+          _unwrap(object, index, value)
+        end
+      end
+
       def unwrap_value!(object, key)
         value = object.get(key)
+        _unwrap(object, key, value)
+      end
+
+      def _unwrap(object, key, value)
         raise ArgumentError, "nil value for #{key.inspect}" unless value
 
         if wrapper_method = _unwrapper(value)
