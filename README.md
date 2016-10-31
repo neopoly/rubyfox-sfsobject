@@ -94,6 +94,11 @@ sfs_object[:string] # => "value"
 
 *   More docs, please!
 
+## Release
+
+1. Bump `VERSION` in `lib/rubyfox/sfsobject/version.rb`
+2. Commit version bump via `git commit -am "Release X.Y.Z"`
+3. Run `rake release`
 
 ## Contributing
 
