@@ -94,6 +94,21 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     test "sfsobject" do
       assert_conversion({ :sfsobject => [Rubyfox::SFSObject.new]}, { :sfsobject => [{}] })
     end
+
+    test "loads mixed arrays" do
+      object = Rubyfox::SFSObject.from_json('{"mixed": [
+        "foo",
+        true,
+        1.0,
+        {
+          "deep" => ["Föhn", "BÄR"]
+        }
+      ]}')
+      expected = {
+       :mixed => ["foo", true, 1.0, {:deep => ["Föhn", "BÄR"]}]
+      }
+      assert_equal expected, Rubyfox::SFSObject::Bulk.to_hash(object)
+    end
   end
 
   private
