@@ -56,6 +56,22 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
       assert_conversion :float => 1.0 / 3
     end
 
+    test "converts Java's double to Ruby's Float" do
+      object = Rubyfox::SFSObject.new
+      object.put_double("double", 1.0 / 3)
+      hash = Rubyfox::SFSObject::Bulk.to_hash(object)
+
+      assert_in_epsilon 1.0 / 3, hash.fetch(:double)
+    end
+
+    test "converts Java's float to Ruby's Float" do
+      object = Rubyfox::SFSObject.new
+      object.put_float("float", 1.0 / 3)
+      hash = Rubyfox::SFSObject::Bulk.to_hash(object)
+
+      assert_in_epsilon 1.0 / 3, hash.fetch(:float)
+    end
+
     test "sub hashes" do
       assert_conversion :sub => { :key => "value" }
       assert_conversion :sub => { :deep => { :key => "value" } }
@@ -84,6 +100,22 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
 
     test "float" do
       assert_conversion :float => [ 1.0, 1.0 / 3 ]
+    end
+
+    test "converts Java's double array to Ruby's Float array" do
+      object = Rubyfox::SFSObject.new
+      object.put_double_array("double_array", [1.0 / 3])
+      hash = Rubyfox::SFSObject::Bulk.to_hash(object)
+
+      assert_equal [1.0 / 3], hash.fetch(:double_array)
+    end
+
+    test "converts Java's float to Ruby's Float" do
+      object = Rubyfox::SFSObject.new
+      object.put_float_array("float_array", [1.0 / 3])
+      hash = Rubyfox::SFSObject::Bulk.to_hash(object)
+
+      assert_equal [1.0 / 3], hash.fetch(:float_array)
     end
 
     test "sub hashes" do

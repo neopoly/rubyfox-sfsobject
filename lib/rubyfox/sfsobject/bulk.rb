@@ -41,12 +41,14 @@ module Rubyfox
         "BOOL"              =>  :getBool,
         "INT"               =>  :getInt,
         "DOUBLE"            =>  :getDouble,
+        "FLOAT"             =>  :getFloat,
         "UTF_STRING_ARRAY"  =>  :getUtfStringArray,
         "BOOL_ARRAY"        =>  :getBoolArray,
         #"INT_ARRAY"         =>  :getIntArray,
         "INT_ARRAY"         =>  proc { |k, v| v.object.to_a },
         "LONG_ARRAY"        =>  :getLongArray,
         "DOUBLE_ARRAY"      =>  :getDoubleArray,
+        "FLOAT_ARRAY"      =>   :getFloatArray,
         "SFS_OBJECT"        =>  proc { |k, v| to_hash(v.object) },
         "SFS_ARRAY"         =>  proc { |k, v| to_array(v.object) }
       }

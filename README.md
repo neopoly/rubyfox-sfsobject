@@ -85,7 +85,10 @@ sfs_object[:string] # => "value"
 
 ## Caveats
 
-**Note** that all hash keys will be converted to symbols.
+* All hash keys will be converted to symbols
+* In "bulk mode"
+  * all Ruby's Float values will be converted Java's double (via `putDouble` or `putDoubleArray`)
+  * all Java's double values will be converted to Ruby's float (via `getFloat` or `getFloatArray`)
 
 ## TODO
 
