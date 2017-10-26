@@ -2,15 +2,12 @@
 [doc]: http://rubydoc.info/github/neopoly/rubyfox-sfsobject/master/file/README.md
 [gem]: https://rubygems.org/gems/rubyfox-sfsobject
 [travis]: https://travis-ci.org/neopoly/rubyfox-sfsobject
-[codeclimate]: https://codeclimate.com/github/neopoly/rubyfox-sfsobject
 [inchpages]: https://inch-ci.org/github/neopoly/rubyfox-sfsobject
 
 # Rubyfox::SFSObject
 
 [![Travis](https://img.shields.io/travis/neopoly/rubyfox-sfsobject.svg?branch=master)][travis]
 [![Gem Version](https://img.shields.io/gem/v/rubyfox-sfsobject.svg)][gem]
-[![Code Climate](https://img.shields.io/codeclimate/github/neopoly/rubyfox-sfsobject.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/neopoly/rubyfox-sfsobject/badges/coverage.svg)][codeclimate]
 [![Inline docs](https://inch-ci.org/github/neopoly/rubyfox-sfsobject.svg?branch=master&style=flat)][inchpages]
 
 [Gem][gem] |

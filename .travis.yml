@@ -2,11 +2,10 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - jruby-9.1.5.0
-  - jruby-1.7.26
+  - jruby-9.1.13.0
+  - jruby-1.7.27
 env:
   global:
-    - CODECLIMATE_REPO_TOKEN=7800b9ed7143dedbdc5e3c62021efa6944bacce3ea9e001654d7481cdabb8c07
     - JRUBY_OPTS='--dev -J-Xmx1024M'
 matrix:
   fast_finish: true
