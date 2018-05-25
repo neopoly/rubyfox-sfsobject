@@ -46,7 +46,7 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     end
 
     test "cannot handle bignum" do
-      assert_raises ArgumentError, :message => /Bignum/ do
+      assert_raises RangeError, :message => /bignum too big/ do
         assert_conversion :integer => (2 ** 63)
       end
     end
