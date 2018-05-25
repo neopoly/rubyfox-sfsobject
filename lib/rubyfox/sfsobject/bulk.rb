@@ -10,14 +10,14 @@ module Rubyfox
         String        =>  :putUtfString,
         TrueClass     =>  :putBool,
         FalseClass    =>  :putBool,
-        Fixnum        =>  :putInt,
+        Integer       =>  :putInt,
         Float         =>  :putDouble,
         Hash          =>  proc { |o, k, v| o.putSFSObject(k, to_sfs(v)) },
         Java::SFSObject => :putSFSObject,
         [String]      =>  :putUtfStringArray,
         [TrueClass]   =>  :putBoolArray,
         [FalseClass]  =>  :putBoolArray,
-        [Fixnum]      =>  proc do |o, k, v|
+        [Integer]     =>  proc do |o, k, v|
           collection = Java::ArrayList.new
           v.each { |e| collection.add(e.to_java(:int)) }
           o.putIntArray(k, collection)
