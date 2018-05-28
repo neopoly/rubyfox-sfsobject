@@ -1,4 +1,4 @@
-require 'rubyfox/sfsobject/java'
+require "rubyfox/sfsobject/java"
 
 module Rubyfox
   module SFSObject
@@ -6,24 +6,24 @@ module Rubyfox
       extend self
 
       TO_SFS = {
-        NilClass      =>  proc { |o, k, _| o.putNull(k) },
-        String        =>  :putUtfString,
-        TrueClass     =>  :putBool,
-        FalseClass    =>  :putBool,
-        Integer       =>  :putInt,
-        Float         =>  :putDouble,
-        Hash          =>  proc { |o, k, v| o.putSFSObject(k, to_sfs(v)) },
+        NilClass => proc { |o, k, _| o.putNull(k) },
+        String => :putUtfString,
+        TrueClass => :putBool,
+        FalseClass => :putBool,
+        Integer => :putInt,
+        Float => :putDouble,
+        Hash => proc { |o, k, v| o.putSFSObject(k, to_sfs(v)) },
         Java::SFSObject => :putSFSObject,
-        [String]      =>  :putUtfStringArray,
-        [TrueClass]   =>  :putBoolArray,
-        [FalseClass]  =>  :putBoolArray,
-        [Integer]     =>  proc do |o, k, v|
+        [String] => :putUtfStringArray,
+        [TrueClass] => :putBoolArray,
+        [FalseClass] => :putBoolArray,
+        [Integer] => proc do |o, k, v|
           collection = Java::ArrayList.new
           v.each { |e| collection.add(e.to_java(:int)) }
           o.putIntArray(k, collection)
         end,
-        [Float]       =>  :putDoubleArray,
-        [Hash]        =>  proc do |o, k, v|
+        [Float] => :putDoubleArray,
+        [Hash] => proc do |o, k, v|
           ary = Java::SFSArray.new
           v.each { |e| ary.addSFSObject(to_sfs(e)) }
           o.putSFSArray(k, ary)
@@ -32,29 +32,29 @@ module Rubyfox
           ary = Java::SFSArray.new
           v.each { |e| ary.addSFSObject(e) }
           o.putSFSArray(k, ary)
-        end
+        end,
       }
 
       TO_HASH = {
-        "NULL"              =>  proc { |k, v| nil },
-        "UTF_STRING"        =>  :getUtfString,
-        "BOOL"              =>  :getBool,
-        "INT"               =>  :getInt,
-        "DOUBLE"            =>  :getDouble,
-        "FLOAT"             =>  :getFloat,
-        "UTF_STRING_ARRAY"  =>  :getUtfStringArray,
-        "BOOL_ARRAY"        =>  :getBoolArray,
+        "NULL" => proc { |k, v| nil },
+        "UTF_STRING" => :getUtfString,
+        "BOOL" => :getBool,
+        "INT" => :getInt,
+        "DOUBLE" => :getDouble,
+        "FLOAT" => :getFloat,
+        "UTF_STRING_ARRAY" => :getUtfStringArray,
+        "BOOL_ARRAY" => :getBoolArray,
         #"INT_ARRAY"         =>  :getIntArray,
-        "INT_ARRAY"         =>  proc { |k, v| v.object.to_a },
-        "LONG_ARRAY"        =>  :getLongArray,
-        "DOUBLE_ARRAY"      =>  :getDoubleArray,
-        "FLOAT_ARRAY"      =>   :getFloatArray,
-        "SFS_OBJECT"        =>  proc { |k, v| to_hash(v.object) },
-        "SFS_ARRAY"         =>  proc { |k, v| to_array(v.object) }
+        "INT_ARRAY" => proc { |k, v| v.object.to_a },
+        "LONG_ARRAY" => :getLongArray,
+        "DOUBLE_ARRAY" => :getDoubleArray,
+        "FLOAT_ARRAY" => :getFloatArray,
+        "SFS_OBJECT" => proc { |k, v| to_hash(v.object) },
+        "SFS_ARRAY" => proc { |k, v| to_array(v.object) },
       }
 
       # hash -> object
-      def to_sfs(hash={})
+      def to_sfs(hash = {})
         object = Java::SFSObject.new
         hash.each do |key, value|
           wrap_value!(object, key, value)
@@ -78,7 +78,14 @@ module Rubyfox
       def _wrapper(value)
         case value
         when Array
-          TO_SFS[[value.first.class]]
+          case value = value.first
+          when Integer # This is necessary to support ruby < 2.4.
+            TO_SFS[[Integer]]
+          else
+            TO_SFS[[value.class]]
+          end
+        when Integer # See above.
+          TO_SFS[Integer]
         else
           TO_SFS[value.class]
         end
