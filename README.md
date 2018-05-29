@@ -20,7 +20,7 @@ Converts between SmartFox's SFSObjects and Ruby Hashes.
 
 Add this line to your application's Gemfile:
 
-    gem 'rubyfox-sfsobject', '~> 0.7.0'
+    gem 'rubyfox-sfsobject', '~> 0.8.0'
 
 And then execute:
 
@@ -28,7 +28,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install rubyfox-sfsobject -v 0.7.0
+    $ gem install rubyfox-sfsobject -v 0.8.0
 
 ## Usage
 
