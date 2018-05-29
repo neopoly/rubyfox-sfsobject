@@ -2,7 +2,8 @@ language: ruby
 sudo: false
 cache: bundler
 rvm:
-  - jruby-9.1.13.0
+  - jruby-9.2.0.0
+  - jruby-9.1.17.0
   - jruby-1.7.27
 env:
   global:

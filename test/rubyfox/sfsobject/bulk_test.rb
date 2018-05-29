@@ -1,7 +1,7 @@
-# encoding: utf-8 
+# encoding: utf-8
 
-require 'helper'
-require 'rubyfox/sfsobject/bulk'
+require "helper"
+require "rubyfox/sfsobject/bulk"
 
 class RubyfoxSFSObjectBulkTest < RubyfoxCase
   test "empty" do
@@ -9,7 +9,7 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
   end
 
   test "converts keys to symbols" do
-    assert_conversion({ "key" => nil }, { :key => nil })
+    assert_conversion({"key" => nil}, {:key => nil})
   end
 
   test "raise ArgumentError for nil values" do
@@ -33,21 +33,21 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
       assert_conversion :true => true, :false => false
     end
 
-    test "fixnum" do
-      assert_conversion :fixnum => 1
-      assert_conversion :fixnum => (2 ** 31 - 1)
-      assert_conversion :fixnum => -(2 ** 31)
+    test "integer" do
+      assert_conversion :integer => 1
+      assert_conversion :integer => (2 ** 31 - 1)
+      assert_conversion :integer => -(2 ** 31)
     end
 
-    test "fixnum too big for int" do
+    test "integer too big for int" do
       assert_raises RangeError, :message => /too big for int/ do
-        assert_conversion :fixnum => (2 ** 31)
+        assert_conversion :integer => (2 ** 31)
       end
     end
 
     test "cannot handle bignum" do
-      assert_raises ArgumentError, :message => /Bignum/ do
-        assert_conversion :fixnum => (2 ** 63)
+      assert_raises RangeError, :message => /bignum too big/ do
+        assert_conversion :integer => (2 ** 63)
       end
     end
 
@@ -73,12 +73,12 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     end
 
     test "sub hashes" do
-      assert_conversion :sub => { :key => "value" }
-      assert_conversion :sub => { :deep => { :key => "value" } }
+      assert_conversion :sub => {:key => "value"}
+      assert_conversion :sub => {:deep => {:key => "value"}}
     end
 
     test "sfsobject" do
-      assert_conversion({ :sfsobject => Rubyfox::SFSObject.new }, { :sfsobject => {} })
+      assert_conversion({:sfsobject => Rubyfox::SFSObject.new}, {:sfsobject => {}})
     end
   end
 
@@ -91,15 +91,15 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     end
 
     test "boolean" do
-      assert_conversion :bool => [ true, false ]
+      assert_conversion :bool => [true, false]
     end
 
-    test "fixnum" do
-      assert_conversion :fixnum => [ 1, 2, 3 ]
+    test "integer" do
+      assert_conversion :integer => [1, 2, 3]
     end
 
     test "float" do
-      assert_conversion :float => [ 1.0, 1.0 / 3 ]
+      assert_conversion :float => [1.0, 1.0 / 3]
     end
 
     test "converts Java's double array to Ruby's Float array" do
@@ -119,12 +119,12 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
     end
 
     test "sub hashes" do
-      assert_conversion :sub => [{ :key => "value" }]
-      assert_conversion :sub => [{ :deep => [{ :key => "value" }] }]
+      assert_conversion :sub => [{:key => "value"}]
+      assert_conversion :sub => [{:deep => [{:key => "value"}]}]
     end
 
     test "sfsobject" do
-      assert_conversion({ :sfsobject => [Rubyfox::SFSObject.new]}, { :sfsobject => [{}] })
+      assert_conversion({:sfsobject => [Rubyfox::SFSObject.new]}, {:sfsobject => [{}]})
     end
 
     test "loads mixed arrays" do
@@ -137,7 +137,7 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
         }
       ]}')
       expected = {
-       :mixed => ["foo", true, 1.0, {:deep => ["Föhn", "BÄR"]}]
+        :mixed => ["foo", true, 1.0, {:deep => ["Föhn", "BÄR"]}],
       }
       assert_equal expected, Rubyfox::SFSObject::Bulk.to_hash(object)
     end
@@ -145,7 +145,7 @@ class RubyfoxSFSObjectBulkTest < RubyfoxCase
 
   private
 
-  def assert_conversion(input, output=input)
+  def assert_conversion(input, output = input)
     object = Rubyfox::SFSObject::Bulk.to_sfs(input)
     assert_equal output, Rubyfox::SFSObject::Bulk.to_hash(object)
   end

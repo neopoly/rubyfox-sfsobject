@@ -26,15 +26,15 @@ class RubyfoxSFSObjectSchemaTest < RubyfoxCase
       assert_schema({ :bool => Boolean }, { :bool => false })
     end
 
-    test "fixnum" do
-      assert_schema({ :fixnum => Fixnum }, { :fixnum => 1 })
-      assert_schema({ :fixnum => Fixnum }, { :fixnum => (2 ** 31 - 1) })
-      assert_schema({ :fixnum => Fixnum }, { :fixnum => -(2 ** 31) })
+    test "integer" do
+      assert_schema({ :integer => Integer }, { :integer => 1 })
+      assert_schema({ :integer => Integer }, { :integer => (2 ** 31 - 1) })
+      assert_schema({ :integer => Integer }, { :integer => -(2 ** 31) })
     end
 
-    test "fixnum too big for int" do
+    test "integer too big for int" do
       assert_raises RangeError, :message => /too big for int/ do
-        assert_schema({ :fixnum => Fixnum }, { :fixnum => (2 ** 31) })
+        assert_schema({ :integer => Integer }, { :integer => (2 ** 31) })
       end
     end
 
@@ -69,9 +69,9 @@ class RubyfoxSFSObjectSchemaTest < RubyfoxCase
       assert_schema({ :bool => [Boolean] }, { :bool => [true, 23] }) # strange?
     end
 
-    test "fixnum" do
-      assert_schema({ :fixnum => [Fixnum] }, { :fixnum => [1, 2] })
-      assert_schema({ :fixnum => [Fixnum] }, { :fixnum => [(2 ** 31 - 1), -(2 ** 31)] })
+    test "integer" do
+      assert_schema({ :integer => [Integer] }, { :integer => [1, 2] })
+      assert_schema({ :integer => [Integer] }, { :integer => [(2 ** 31 - 1), -(2 ** 31)] })
     end
 
     test "float" do

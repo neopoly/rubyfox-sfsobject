@@ -17,12 +17,12 @@ module Rubyfox
       TO_SFS = {
         String    => proc { |o, s, k, v| o.put_utf_string(k, v) },
         Boolean   => proc { |o, s, k, v| o.put_bool(k, v) },
-        Fixnum    => proc { |o, s, k, v| o.put_int(k, v) },
+        Integer   => proc { |o, s, k, v| o.put_int(k, v) },
         Float     => proc { |o, s, k, v| o.put_double(k, v) },
         Hash      => proc { |o, s, k, v| o.put_sfs_object(k, to_sfs(s, v)) },
         [String]  => proc { |o, s, k, v| o.put_utf_string_array(k, v) },
         [Boolean] => proc { |o, s, k, v| o.put_bool_array(k, v) },
-        [Fixnum]  =>  proc do |o, s, k, v|
+        [Integer] =>  proc do |o, s, k, v|
           collection = Java::ArrayList.new(v.size)
           v.each { |e| collection.add(e.to_java(:int)) }
           o.put_int_array(k, collection)
@@ -39,12 +39,12 @@ module Rubyfox
       TO_HASH = {
         String    => proc { |o, s, k| o.get_utf_string(k) },
         Boolean   => proc { |o, s, k| o.get_bool(k) },
-        Fixnum    => proc { |o, s, k| o.get_int(k) },
+        Integer   => proc { |o, s, k| o.get_int(k) },
         Float     => proc { |o, s, k| o.get_double(k) },
         Hash      => proc { |o, s, k| to_hash(s, o.get_sfs_object(k)) },
         [String]  => proc { |o, s, k| o.get_utf_string_array(k).to_a },
         [Boolean] => proc { |o, s, k| o.get_bool_array(k).to_a },
-        [Fixnum]  => proc { |o, s, k| o.get_int_array(k).to_a },
+        [Integer] => proc { |o, s, k| o.get_int_array(k).to_a },
         [Float]   => proc { |o, s, k| o.get_double_array(k).to_a },
         [Hash]    => proc { |o, s, k|
           sfs_ary = o.get_sfs_array(k)
