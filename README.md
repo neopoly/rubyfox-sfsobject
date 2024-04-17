@@ -1,12 +1,11 @@
 [github]: https://github.com/neopoly/rubyfox-sfsobject
 [doc]: http://rubydoc.info/github/neopoly/rubyfox-sfsobject/master/file/README.md
 [gem]: https://rubygems.org/gems/rubyfox-sfsobject
-[travis]: https://travis-ci.org/neopoly/rubyfox-sfsobject
 [inchpages]: https://inch-ci.org/github/neopoly/rubyfox-sfsobject
 
 # Rubyfox::SFSObject
 
-[![Travis](https://img.shields.io/travis/neopoly/rubyfox-sfsobject.svg?branch=master)][travis]
+[![Build Status](https://github.com/neopoly/rubyfox-sfsobject/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/neopoly/rubyfox-sfsobject/actions?query=branch%3Amaster)
 [![Gem Version](https://img.shields.io/gem/v/rubyfox-sfsobject.svg)][gem]
 [![Inline docs](https://inch-ci.org/github/neopoly/rubyfox-sfsobject.svg?branch=master&style=flat)][inchpages]
 
