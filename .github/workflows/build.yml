@@ -9,6 +9,8 @@ jobs:
         ruby-version:
           - "jruby-9.1.17.0"
           - "jruby-9.2.21.0"
+          - "jruby-9.3.14.0"
+          - "jruby-9.4.6.0"
     env:
       JRUBY_OPTS: "--dev -J-Xmx1024M"
     steps:
